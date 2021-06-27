@@ -41,6 +41,8 @@ h1, h2, h3, h4, h5, h6, p, a, span{
   display: block;
   width: 100%;
   padding: 1px 30px;
+  max-height: 92vh;
+  overflow-y: scroll;
 }
 
 .navigation{

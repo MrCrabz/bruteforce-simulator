@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 
+import parse from 'html-react-parser';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -10,7 +11,9 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-          plainText: ''
+          plainText: '',
+          outputCipher: [],
+          cypherMax: 26,
       };
       this.capturePlainText = this.capturePlainText.bind(this);
       this.caesarCipher = this.caesarCipher.bind(this);
@@ -22,7 +25,10 @@ class App extends React.Component {
   }
 
   caesarCipher() {
-    for (var cypherLevel = 1; cypherLevel < 26; cypherLevel++) {
+    let arrayofCiphers = [];
+    for (var cypherLevel = 1; cypherLevel < this.state.cypherMax; cypherLevel++) {
+
+      // list of answers array
       // Captures the given plain text
       let currentPlainText = this.state.plainText;
       // Removes the spaces from the given plain text
@@ -59,8 +65,10 @@ class App extends React.Component {
         cipherOutput += c;
       }
 
-      console.log("K" + cypherLevel + ": " + cipherOutput);
+      arrayofCiphers[cypherLevel-1] = "<p class='outputLine' id='output1'><span class='decryptionLevel dark'>K" + cypherLevel + ":</span><span class='decryptionOutput dark'>" + cipherOutput + "</span></p>";
+
     }
+    this.setState({outputCipher: arrayofCiphers});
   }
 
   render() {
@@ -92,7 +100,7 @@ class App extends React.Component {
             <div className="lateral lateralRight col-lg-6 col-12">
 
               <div className="outputBox">
-                {this.caesarCipher}
+                {parse(this.state.outputCipher.join(" ").toString())}
               </div>
 
             </div>
