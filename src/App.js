@@ -91,7 +91,7 @@ class App extends React.Component {
                   className="button"
                   onClick={this.caesarCipher}
                 >
-                  Brute Force
+                  Encrypt
                 </button>
               </div>
 
